@@ -1,0 +1,6 @@
+*.wav
+gtzan/*
+noise-sources/*
+noisy-audio/*
+*.tar.gz
+*.tar.xz
