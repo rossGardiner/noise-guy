@@ -5,6 +5,8 @@ import librosa
 import numpy as np
 from scipy.io import wavfile
 import random
+import struct
+
 
 SAMPLE_RATE = 22050
 
@@ -28,6 +30,7 @@ parser.add_argument('--out', type=dir_path, default='output',
                     help='output directory')
 parser.add_argument('--nr_clean', type=int, help='number of clips to use from each gtzan genre', default=1)
 parser.add_argument('--nr_noise', type=int, help='number of noise clips to use', default=10)
+parser.add_argument('--dat', type=bool, help='save output data as .dat files', default=True)
 parser.add_argument('--rand', type=bool, help='take a random audio file from each genre rather than the first', default=False)
 
 args = parser.parse_args()
@@ -65,7 +68,13 @@ for noise in noise_files:
             noise_slice = noise_slice[middle - l//2: middle + l//2]
 
         new_data = clean_data + noise_slice
-        wavfile.write(args.out + '/{}-{}.wav'.format(clean_name, noise_name), s, new_data)
+
+        if args.dat:
+            np.savetxt(args.out + '/{}-{}.dat'.format(clean_name, noise_name), new_data)
+        else:
+            wavfile.write(args.out + '/{}-{}.wav'.format(clean_name, noise_name), s, new_data)
+
+
         count += 1
     #    print(rate)
     #print(len(data_noise))
