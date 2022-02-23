@@ -30,7 +30,7 @@ parser.add_argument('--out', type=dir_path, default='output',
                     help='output directory')
 parser.add_argument('--nr_clean', type=int, help='number of clips to use from each gtzan genre', default=1)
 parser.add_argument('--nr_noise', type=int, help='number of noise clips to use', default=10)
-parser.add_argument('--dat', type=bool, help='save output data as .dat files', default=True)
+parser.add_argument('--dat', type=bool, help='save output data as .dat files', default=False)
 parser.add_argument('--rand', type=bool, help='take a random audio file from each genre rather than the first', default=False)
 
 args = parser.parse_args()
